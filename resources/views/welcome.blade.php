@@ -7,6 +7,11 @@
     <title>Katalog Mobil dan Motor</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <style>
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f8f9fa;
@@ -53,72 +58,72 @@
     <!-- Tentang Perusahaan -->
     <section class="container my-5 text-center">
         <h2 class="mb-4">Tentang Perusahaan</h2>
-        <p class="lead">Perusahaan kami berdedikasi untuk memberikan produk terbaik dengan layanan terbaik. Kami menawarkan berbagai macam mobil dan motor untuk memenuhi kebutuhan Anda.</p>
+        <p class="lead">Perusahaan kami berdedikasi untuk memberikan produk terbaik dengan layanan terbaik. Kami
+            menawarkan berbagai macam mobil dan motor untuk memenuhi kebutuhan Anda.</p>
     </section>
 
-    <!-- Slider Produk Unggulan -->
+    <!-- Produk Unggulan -->
     <section class="container my-5">
         <h2 class="mb-4 text-center">Produk Unggulan</h2>
-        <div id="featuredCarousel" class="carousel slide" data-ride="carousel">
+        <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://cache4.pakwheels.com/system/car_generation_pictures/7370/original/Cover.jpg?1677570254" class="d-block w-100" alt="Product 1">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Produk 1</h5>
-                        <p>Deskripsi Produk 1</p>
+                @foreach($featuredVehicles as $key => $product)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        <img src="{{ asset('storage/images/' . $product->image) }}" class="d-block w-100"
+                            alt="{{ $product->model }}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ $product->brand }} {{ $product->model }}</h5>
+                            <p>{{ $product->description }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://cache4.pakwheels.com/system/car_generation_pictures/7370/original/Cover.jpg?1677570254" class="d-block w-100" alt="Product 2">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Produk 2</h5>
-                        <p>Deskripsi Produk 2</p>
-                    </div>
-                </div>
-                <!-- Add more carousel items as needed -->
+                @endforeach
             </div>
-            <a class="carousel-control-prev" href="#featuredCarousel" role="button" data-slide="prev">
+            <a class="carousel-control-prev" href="#featuredCarousel" role="button" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#featuredCarousel" role="button" data-slide="next">
+            <a class="carousel-control-next" href="#featuredCarousel" role="button" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
     </section>
 
-    <!-- List Produk -->
-    <section class="container my-5">
+    <!-- Produk Kami -->
+    <section id="product-list" class="container my-5">
         <h2 class="mb-4 text-center">Produk Kami</h2>
+        
+        <!-- Filter Form -->
+        <form method="GET" action="{{ url('/#product-list') }}" class="mb-4">
+            <div class="row">
+                <div class="col-md-4 offset-md-4">
+                    <select name="filter" class="form-select" onchange="this.form.submit()">
+                        <option value="">Semua</option>
+                        <option value="car" {{ request('filter') == 'car' ? 'selected' : '' }}>Mobil</option>
+                        <option value="motorcycle" {{ request('filter') == 'motorcycle' ? 'selected' : '' }}>Motor</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        
         <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="https://cache4.pakwheels.com/system/car_generation_pictures/7370/original/Cover.jpg?1677570254" class="card-img-top" alt="Car 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Brand Mobil</h5>
-                        <p class="card-text">Jenis: Sedan</p>
-                        <p class="card-text">Harga: $20,000</p>
+            @foreach ($vehicles as $vehicle)
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <img src="{{ asset('storage/images/' . $vehicle->image) }}" class="card-img-top" alt="{{ $vehicle->model }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $vehicle->brand }} {{ $vehicle->model }}</h5>
+                            <p class="card-text">{{ $vehicle->description }}</p>
+                            <p class="card-text">Harga: Rp {{ number_format($vehicle->price, 0, ',', '.') }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img src="https://cache4.pakwheels.com/system/car_generation_pictures/7370/original/Cover.jpg?1677570254" class="card-img-top" alt="Motorcycle 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Brand Motor</h5>
-                        <p class="card-text">Jenis: Sport</p>
-                        <p class="card-text">Harga: $15,000</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more product cards as needed -->
+            @endforeach
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="text-center">
-        <p>&copy; 2024 Katalog Mobil dan Motor. All Rights Reserved.</p>
+        <p>&copy; 2024 {{ $companyInfo->name }}. All Rights Reserved.</p>
     </footer>
 </body>
 

@@ -14,11 +14,12 @@ return new class extends Migration {
             $table->id();
             $table->string('brand', 100);
             $table->enum('type', ['car', 'motorcycle']);
+            $table->bigInteger('price');
             $table->string('model', 100);
             $table->string('year', 100)->nullable();
             $table->string('color', 100)->nullable();
             $table->text('description')->nullable();
-            $table->binary('image')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
