@@ -22,7 +22,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'White',
                 'description' => 'Compact sedan with great fuel efficiency',
                 'price' => 1200000000,
-                'image' => 'honda_civic.jpg',
+                'image' => 'images/honda_civic.jpg',
             ],
             [
                 'brand' => 'Toyota',
@@ -32,7 +32,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Red',
                 'description' => 'Reliable and popular sedan',
                 'price' => 900000000,
-                'image' => 'toyota_corolla.jpg',
+                'image' => 'images/toyota_corolla.jpg',
             ],
             [
                 'brand' => 'BMW',
@@ -42,7 +42,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Blue',
                 'description' => 'Luxury SUV with cutting-edge technology',
                 'price' => 3000000000,
-                'image' => 'bmw_x5.jpg',
+                'image' => 'images/bmw_x5.jpg',
             ],
             [
                 'brand' => 'Ford',
@@ -52,7 +52,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Yellow',
                 'description' => 'Iconic sports car with powerful performance',
                 'price' => 2500000000,
-                'image' => 'ford_mustang.jpg',
+                'image' => 'images/ford_mustang.jpg',
             ],
             [
                 'brand' => 'Mercedes-Benz',
@@ -62,7 +62,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Silver',
                 'description' => 'Elegant and comfortable executive sedan',
                 'price' => 2000000000,
-                'image' => 'mercedes_e_class.jpg',
+                'image' => 'images/mercedes_e_class.jpg',
             ],
             [
                 'brand' => 'Kawasaki',
@@ -72,7 +72,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Green',
                 'description' => 'Sporty and agile motorcycle',
                 'price' => 750000000,
-                'image' => 'kawasaki_ninja_300.jpg',
+                'image' => 'images/kawasaki_ninja_300.jpg',
             ],
             [
                 'brand' => 'Harley-Davidson',
@@ -82,7 +82,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Silver',
                 'description' => 'Classic cruiser motorcycle',
                 'price' => 1000000000,
-                'image' => 'harley_sportster_883.jpg',
+                'image' => 'images/harley_sportster_883.jpg',
             ],
             [
                 'brand' => 'Yamaha',
@@ -92,7 +92,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Gray',
                 'description' => 'Versatile and nimble naked bike',
                 'price' => 550000000,
-                'image' => 'yamaha_mt07.jpg',
+                'image' => 'images/yamaha_mt07.jpg',
             ],
             [
                 'brand' => 'Ducati',
@@ -102,7 +102,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Red',
                 'description' => 'High-performance superbike with cutting-edge technology',
                 'price' => 1100000000,
-                'image' => 'ducati_panigale_v4.jpg',
+                'image' => 'images/ducati_panigale_v4.jpg',
             ],
             [
                 'brand' => 'Suzuki',
@@ -112,7 +112,7 @@ class VehicleSeeder extends Seeder
                 'color' => 'Blue',
                 'description' => 'Legendary sportbike known for its speed and agility',
                 'price' => 2200000000,
-                'image' => 'suzuki_gsxr1000.jpg',
+                'image' => 'images/suzuki_gsxr1000.jpg',
             ],
         ];
 
