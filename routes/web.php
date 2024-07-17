@@ -7,4 +7,5 @@ Route::get('/', [MainController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/admin/store', [App\Http\Controllers\HomeController::class, 'store'])->name('admin.store');

@@ -69,7 +69,7 @@
             <div class="carousel-inner">
                 @foreach($featuredVehicles as $key => $product)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <img src="{{ asset('storage/images/' . $product->image) }}" class="d-block w-100"
+                        <img src="{{ asset('storage/' . $product->image) }}" class="d-block w-100"
                             alt="{{ $product->model }}">
                         <div class="carousel-caption d-none d-md-block">
                             <h5>{{ $product->brand }} {{ $product->model }}</h5>
@@ -110,7 +110,7 @@
             @foreach ($vehicles as $vehicle)
                 <div class="col-md-4">
                     <div class="card mb-4 shadow-sm">
-                        <img src="{{ asset('storage/images/' . $vehicle->image) }}" class="card-img-top" alt="{{ $vehicle->model }}">
+                        <img src="{{ asset('storage/' . $vehicle->image) }}" class="card-img-top" alt="{{ $vehicle->model }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $vehicle->brand }} {{ $vehicle->model }}</h5>
                             <p class="card-text">{{ $vehicle->description }}</p>
