@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Vehicle;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
@@ -28,7 +29,15 @@ class HomeController extends Controller
         return view('index', compact('vehicles'));
     }
 
-    public function store(Request $request) {
+
+    public function showForm($id = null)
+    {
+        $vehicle = $id ? Vehicle::find($id) : null;
+        return view('home', compact('vehicle'));
+    }
+
+    public function store(Request $request)
+    {
         $request->validate([
             'type' => 'required',
             'brand' => 'required',
@@ -39,7 +48,7 @@ class HomeController extends Controller
             'description' => 'required',
             'image' => 'required|image'
         ]);
-        
+
         $image = $request->file('image');
         $imagePath = $image->store('images', 'public');
         Vehicle::create([
@@ -54,5 +63,49 @@ class HomeController extends Controller
         ]);
 
         return redirect()->route('home')->with('status', 'Vehicle created successfully!');
+    }
+    
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'type' => 'required',
+            'brand' => 'required',
+            'model' => 'required',
+            'price' => 'required|numeric',
+            'year' => 'required|numeric',
+            'color' => 'required',
+            'description' => 'required',
+            'image' => 'nullable|image',
+        ]);
+
+        $vehicle = Vehicle::find($id);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = $image->store('images', 'public');
+            $data['image'] = $imagePath;
+        } else {
+            unset($data['image']);
+        }
+
+        $vehicle->update($data);
+
+        return redirect()->route('home')->with('status', 'Vehicle updated successfully!');
+    }
+
+    public function destroy($id)
+    {
+        $vehicle = Vehicle::find($id);
+        $vehicle->delete();
+
+        return redirect()->route('home')->with('status', 'Vehicle deleted successfully!');
+    }
+
+    public function exportPdf() {
+        $vehicles = Vehicle::all();
+        $pdf = Pdf::loadView('export', compact('vehicles'));
+        $fileName = 'list-vehicle-' . date('dmYHis') . '-' . uniqid() . '.pdf';
+
+        return $pdf->download($fileName);
     }
 }
