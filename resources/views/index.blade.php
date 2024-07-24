@@ -17,6 +17,18 @@
                     <a href="{{ route('admin.form') }}" class="btn btn-primary mb-3">Add New Vehicle</a>
                     <a href="{{ route('admin.export') }}" class="btn btn-primary mb-3">Export Vehicle</a>
 
+                    <form method="GET" action="{{ route('home') }}" class="form-inline mb-3">
+                        <div class="form-group mr-2">
+                            <label for="brand" class="sr-only">Brand</label>
+                            <input type="text" name="brand" id="brand" class="form-control" placeholder="Search by Brand" value="{{ request('brand') }}">
+                        </div>
+                        <div class="form-group mr-2">
+                            <label for="model" class="sr-only">Model</label>
+                            <input type="text" name="model" id="model" class="form-control" placeholder="Search by Model" value="{{ request('model') }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+
                     <table class="table">
                         <thead>
                             <tr>
@@ -39,8 +51,7 @@
                                     <td>Rp {{ number_format($vehicle->price, 0, ',', '.') }}</td>
                                     <td>{{ $vehicle->year }}</td>
                                     <td>{{ $vehicle->color }}</td>
-                                    <td><img src="{{ Storage::url($vehicle->image) }}" alt="Image" style="width: 100px;">
-                                    </td>
+                                    <td><img src="{{ Storage::url($vehicle->image) }}" alt="Image" style="width: 100px;"></td>
                                     <td>
                                         <a href="{{ route('admin.form', $vehicle->id) }}" class="btn btn-warning"><span class="fas fa-pencil"></span></a>
                                         <form action="{{ route('admin.destroy', $vehicle->id) }}" method="POST" style="display:inline;">

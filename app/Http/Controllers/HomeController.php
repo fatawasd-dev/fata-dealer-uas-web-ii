@@ -23,9 +23,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vehicles = Vehicle::all();
+        $query = Vehicle::query();
+
+        if ($request->has('brand')) {
+            $query->where('brand', 'LIKE', '%' . $request->brand . '%');
+        }
+    
+        if ($request->has('model')) {
+            $query->where('model', 'LIKE', '%' . $request->model . '%');
+        }
+    
+        $vehicles = $query->get();
         return view('index', compact('vehicles'));
     }
 
